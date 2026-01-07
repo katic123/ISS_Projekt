@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://d3ir376df04gd"]
+
+[ext_resource type="Script" uid="uid://c8n7ss4q1ht50" path="res://Scenes/flyingcamera.gd" id="1_8gbba"]
+[ext_resource type="PackedScene" uid="uid://ku3bwaxsbvq" path="res://entities/missle/missle.tscn" id="1_jjgbg"]
+[ext_resource type="Script" uid="uid://d0upfyy8j6w21" path="res://Scenes/switch_cameras.gd" id="1_kry3j"]
+[ext_resource type="PackedScene" uid="uid://bsms6twx141w1" path="res://entities/ground/ground.tscn" id="3_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://glqclqyhwk8x" path="res://entities/tank/tank.tscn" id="4_jjvhh"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_kry3j")
+
+[node name="LauncherCamera" type="Camera3D" parent="."]
+transform = Transform3D(0.963733, 0, -0.26686832, 0, 1, 0, 0.26686832, 0, 0.963733, -0.6108804, 6.852295, 1.548316)
+current = true
+script = ExtResource("1_8gbba")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.7628715, 0.6465502, 0, -0.6465502, 0.7628715, 0, 125.65243, 202.17198)
+light_energy = 1.055
+shadow_enabled = true
+
+[node name="RocketPlayer" parent="." instance=ExtResource("1_jjgbg")]
+transform = Transform3D(1, 0, 0.00015702844, 0, 1, 0, -0.00015702844, 0, 1, 0, 7, 0)
+
+[node name="MissleCamera" type="Camera3D" parent="RocketPlayer"]
+transform = Transform3D(1, 0.00010257657, 3.8133614e-05, -0.00010257657, 0.7571547, 0.6532356, 3.8133614e-05, -0.6532356, 0.7571547, -0.00021154857, 1.1857586, 1.3471991)
+
+[node name="Ground" parent="." instance=ExtResource("3_jjvhh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1639764, 0)
+
+[node name="Tank" parent="." instance=ExtResource("4_jjvhh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.529495, 178.08553, -440.85504)
+
+[node name="Tank2" parent="." instance=ExtResource("4_jjvhh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.80415726, 23.503134, -18.691517)
+
+[node name="Tank3" parent="." instance=ExtResource("4_jjvhh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.80415726, 23.503134, -32.2016)
+
+[node name="Tank4" parent="." instance=ExtResource("4_jjvhh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.80415726, 23.503134, -49.424297)

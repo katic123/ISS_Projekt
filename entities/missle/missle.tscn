@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://ku3bwaxsbvq"]
+
+[ext_resource type="Script" uid="uid://0031mht074al" path="res://entities/missle/components/rocket_movement.gd" id="1_ebkh3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sl6fm"]
+albedo_color = Color(0.06757591, 0.13875896, 0.068691775, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ebkh3"]
+albedo_color = Color(0.0056611504, 0.0056611514, 0.00566115, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sl6fm"]
+height = 1.774826
+radius = 0.13964844
+
+[node name="RocketPlayer" type="CharacterBody3D"]
+transform = Transform3D(-0.00015707215, 0, 1, 0, 1, 0, -1, 0, -0.00015707215, 0, 0, 0)
+script = ExtResource("1_ebkh3")
+
+[node name="RocketParts" type="Node3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="RocketParts"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.13891599, 6.0722107e-09, 0)
+radius = 0.15
+height = 1.6
+sides = 10
+material = SubResource("StandardMaterial3D_sl6fm")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="RocketParts"]
+transform = Transform3D(-4.3709292e-08, -1, -4.3655746e-10, 0.9999517, -4.371139e-08, 0.0098260455, -0.0098260455, 0, 0.9999517, -0.8446738, -3.6921865e-08, 0)
+radius = 0.17285156
+height = 0.391362
+sides = 10
+cone = true
+material = SubResource("StandardMaterial3D_ebkh3")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="RocketParts"]
+transform = Transform3D(-4.3713953e-08, 0, 0.7185744, 0, 1, 0, -1, 0, -3.141031e-08, 0.73663116, 0, -3.2196112e-08)
+size = Vector3(0.01, 0.5, 0.5)
+material = SubResource("StandardMaterial3D_sl6fm")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="RocketParts"]
+transform = Transform3D(0, 4.3713953e-08, 0.7185744, 1, -4.371139e-08, 0, 4.371139e-08, 1, -3.141031e-08, 0.73663116, 0, -3.2196112e-08)
+size = Vector3(0.01, 0.5, 0.5)
+material = SubResource("StandardMaterial3D_sl6fm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.7300134e-08, 4.7300137e-08, -1.082101, 1.082101, 0, -4.7300137e-08, 0, -1.082101, -4.7300137e-08, -0.008737288, -3.819184e-10, 0)
+shape = SubResource("CylinderShape3D_sl6fm")
