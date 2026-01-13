@@ -25,6 +25,8 @@ transform = Transform3D(1, 0, 0.00015702844, 0, 1, 0, -0.00015702844, 0, 1, 0, 7
 [node name="MissleCamera" type="Camera3D" parent="RocketPlayer"]
 transform = Transform3D(1, 0.00010257657, 3.8133614e-05, -0.00010257657, 0.7571547, 0.6532356, 3.8133614e-05, -0.6532356, 0.7571547, -0.00021154857, 1.1857586, 1.3471991)
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RocketPlayer"]
+
 [node name="Ground" parent="." instance=ExtResource("3_jjvhh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1639764, 0)
 
