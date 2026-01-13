@@ -3,8 +3,8 @@ extends CharacterBody3D
 # =========================================================
 # PHYSICAL PARAMETERS (DYNAMICS MODEL)
 # =========================================================
-@export var mass: float = 10.0                 # kg
-@export var thrust_force: float = 5000.0        # N
+@export var mass: float = 30.0                 # kg
+@export var thrust_force: float = 10000.0        # N
 @export var drag_coeff: float = 0.4            # aerodynamic drag
 @export var gravity: float = 9.8               # m/s^2
 @export var substeps: int = 5                  # integration stability
