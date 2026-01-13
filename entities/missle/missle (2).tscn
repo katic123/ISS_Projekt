@@ -1,0 +1,207 @@
+[gd_scene load_steps=5 format=3 uid="uid://01ke2lyk7why"]
+
+[sub_resource type="GDScript" id="GDScript_bk48g"]
+script/source = "extends CharacterBody3D
+
+@export var max_speed: float = 185.0
+@export var turn_speed: float = 70.0  
+@export var acceleration: float = 200.0
+@export var gravity: float = 9.8
+@export var substeps: int = 4
+
+var pitch_angle: float = 0.0  
+var yaw_angle: float = 0.0  
+var time: float = 0.0
+var start: bool = false
+var start_position: Vector3
+
+
+var sphere_spawn_timer: float = 0.0
+const SPHERE_SPAWN_INTERVAL: float = 0.01 
+const SPHERE_LIFETIME: float = 1.0  
+
+var spawned_spheres: Array = []
+
+func _ready():
+	
+	position.x = randf_range(-1000, 0)
+	position.y = 1000
+	position.z = randf_range(0, 1000)
+	
+	var terrain_info=get_terrain_info()
+	if(terrain_info):
+		position.y=terrain_info.position.y+3
+	
+	rotation_degrees.x = 45.0
+	rotation_degrees.y = 0.0
+	pitch_angle = 45.0 
+	start_position=global_position
+	add_to_group(\"rocket\")  
+	
+func _physics_process(delta):
+	
+	if Input.is_action_just_pressed(\"ui_accept\"):
+		start = !start
+		if not start:
+			reset_rocket()
+	
+	if Input.is_action_pressed(\"ui_left\"): 
+		yaw_angle += turn_speed * delta
+	
+	elif Input.is_action_pressed(\"ui_right\"):  
+		yaw_angle -= turn_speed * delta
+	
+	if Input.is_action_pressed(\"ui_up\"):  
+		pitch_angle += turn_speed * delta
+		
+	elif Input.is_action_pressed(\"ui_down\"):  
+		pitch_angle -= turn_speed * delta
+	
+	rotation_degrees.x = pitch_angle  
+	rotation_degrees.y = yaw_angle    
+	
+	if start:
+		sphere_spawn_timer += delta
+		if sphere_spawn_timer >= SPHERE_SPAWN_INTERVAL:
+			spawn_sphere()
+			sphere_spawn_timer = 0.0
+		
+		var substep_delta = delta / substeps
+		
+		for i in range(substeps):
+			var propulsion = -transform.basis.z * min(acceleration * time, max_speed)
+			
+			velocity = propulsion - Vector3(0, gravity * time, 0)
+			
+			var collision = move_and_collide(velocity * substep_delta)
+			
+			if collision:
+				restart_rocket()
+				break 
+			
+			time += substep_delta
+	else: 
+		velocity = Vector3.ZERO
+	
+	
+	cleanup_spheres()
+
+func spawn_sphere():
+	var sphere = MeshInstance3D.new()
+	sphere.mesh = SphereMesh.new()
+	sphere.mesh.radius = 1 
+	sphere.mesh.height = 2.0  
+	
+	var material = StandardMaterial3D.new()
+	material.albedo_color = Color(0, 0, 0)  
+	
+	sphere.material_override = material
+	
+	sphere.position = position
+	
+
+	get_parent().add_child(sphere)
+	
+
+	spawned_spheres.append({
+		\"node\": sphere,
+		\"creation_time\": Time.get_ticks_msec()
+	})
+	
+
+ 
+func cleanup_spheres():
+	var current_time = Time.get_ticks_msec()
+	var spheres_to_remove: Array = []
+	
+	for i in range(spawned_spheres.size() - 1, -1, -1):
+		var sphere_data = spawned_spheres[i]
+		var sphere_age = (current_time - sphere_data[\"creation_time\"]) / 1000.0  # Convert to seconds
+		
+		if sphere_age >= SPHERE_LIFETIME:
+			if is_instance_valid(sphere_data[\"node\"]):
+				sphere_data[\"node\"].queue_free()
+			spheres_to_remove.append(i)
+	
+	for index in spheres_to_remove:
+		spawned_spheres.remove_at(index)
+
+func restart_rocket(): 
+	start = false
+	time = 0.0
+	sphere_spawn_timer = 0.0
+	reset_rocket()
+
+func reset_rocket():
+	rotation_degrees.x = 45.0
+	rotation_degrees.y = 0.0
+	pitch_angle = 45.0
+	yaw_angle = 0.0
+	time = 0.0
+	velocity = Vector3.ZERO
+	position = start_position
+	print(start_position)
+	for sphere_data in spawned_spheres:
+		if is_instance_valid(sphere_data[\"node\"]):
+			sphere_data[\"node\"].queue_free()
+	spawned_spheres.clear()
+
+func _exit_tree():
+	for sphere_data in spawned_spheres:
+		if is_instance_valid(sphere_data[\"node\"]):
+			sphere_data[\"node\"].queue_free()
+			
+func get_terrain_info():
+	var space = get_world_3d().direct_space_state
+	var ray_start = global_position + Vector3(0,1,0) * 10
+	var ray_end = global_position + Vector3(0,-1,0) * 10000
+	var result = space.intersect_ray(PhysicsRayQueryParameters3D.create(ray_start, ray_end))
+	
+	return result
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sl6fm"]
+albedo_color = Color(0.06757591, 0.13875896, 0.068691775, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ebkh3"]
+albedo_color = Color(0.0056611504, 0.0056611514, 0.00566115, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sl6fm"]
+height = 1.8195419
+radius = 0.16357422
+
+[node name="RocketPlayer" type="CharacterBody3D"]
+transform = Transform3D(-0.00015707215, 0, 1, 0, 1, 0, -1, 0, -0.00015707215, 0, 0, 0)
+script = SubResource("GDScript_bk48g")
+
+[node name="RocketParts" type="Node3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="RocketParts"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.13891599, 6.0722107e-09, 0)
+radius = 0.15
+height = 1.6
+sides = 10
+material = SubResource("StandardMaterial3D_sl6fm")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="RocketParts"]
+transform = Transform3D(-4.3709292e-08, -1, -4.3655746e-10, 0.9999517, -4.371139e-08, 0.0098260455, -0.0098260455, 0, 0.9999517, -0.8446738, -3.6921865e-08, 0)
+radius = 0.17285156
+height = 0.391362
+sides = 10
+cone = true
+material = SubResource("StandardMaterial3D_ebkh3")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="RocketParts"]
+transform = Transform3D(-4.3713953e-08, 0, 0.7185744, 0, 1, 0, -1, 0, -3.141031e-08, 0.73663116, 0, -3.2196112e-08)
+size = Vector3(0.01, 0.5, 0.5)
+material = SubResource("StandardMaterial3D_sl6fm")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="RocketParts"]
+transform = Transform3D(0, 4.3713953e-08, 0.7185744, 1, -4.371139e-08, 0, 4.371139e-08, 1, -3.141031e-08, 0.73663116, 0, -3.2196112e-08)
+size = Vector3(0.01, 0.5, 0.5)
+material = SubResource("StandardMaterial3D_sl6fm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.7300134e-08, 4.7293724e-08, -1.082101, 1.082101, 0, -4.7300137e-08, 0, -1.082101, -4.7293724e-08, -0.0087372875, -3.819184e-10, -0.02419355)
+shape = SubResource("CylinderShape3D_sl6fm")

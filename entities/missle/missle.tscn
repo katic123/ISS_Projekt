@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://ku3bwaxsbvq"]
+[gd_scene load_steps=10 format=3 uid="uid://dymjq2key3kb1"]
 
-[ext_resource type="Script" uid="uid://0031mht074al" path="res://entities/missle/components/rocket_movement.gd" id="1_ebkh3"]
+[ext_resource type="Script" uid="uid://v2umnm1604ao" path="res://entities/missle/components/rocket_movement.gd" id="1_ebkh3"]
 [ext_resource type="AudioStream" uid="uid://cgn5ccs5wq1gg" path="res://sounds/rocket1.wav" id="2_6s7ip"]
 [ext_resource type="AudioStream" uid="uid://b756rnfremdbf" path="res://sounds/explode1.wav" id="3_wy4ia"]
 [ext_resource type="AudioStream" uid="uid://b13o31p7453nm" path="res://sounds/rocketfire1.wav" id="4_acwh1"]

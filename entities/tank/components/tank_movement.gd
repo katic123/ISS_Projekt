@@ -2,16 +2,16 @@ extends Node3D
 
 @export var move_speed: float = 5.0
 @export var tilt_smoothness: float = 5.0 
-
 var previous_terrain_normal: Vector3 = Vector3(0,1,0)
 var random_count=0;
 var random = randi_range(1000,2000)
 func _ready():
-	rotation_degrees.y = randf_range(0, 360.0)
+	rotation_degrees.y = randf_range(0, 0)
 	snap_to_terrain()
 
 func _physics_process(delta):
-	var forward_direction = transform.basis.z
+
+	var forward_direction = transform.basis. z
 	if random_count<int(random/2):
 		rotation_degrees.y+=randf_range(0,1)
 	if random_count>=int(random/2):
@@ -31,7 +31,7 @@ func _physics_process(delta):
 func get_terrain_info():
 	var space = get_world_3d().direct_space_state
 	var ray_start = global_position + Vector3(0,1,0) * 10
-	var ray_end = global_position + Vector3(0,-1,0) * 100
+	var ray_end = global_position + Vector3(0,-1,0) * 10000
 	
 	var result = space.intersect_ray(PhysicsRayQueryParameters3D.create(ray_start, ray_end))
 	
@@ -53,5 +53,5 @@ func tilt_to_normal(terrain_normal: Vector3, delta: float):
 func snap_to_terrain():
 	var terrain_info = get_terrain_info()
 	if terrain_info:
-		global_position.y = terrain_info.position.y + 1.0
+		global_position.y = terrain_info.position.y + 100
 		previous_terrain_normal = terrain_info.normal
