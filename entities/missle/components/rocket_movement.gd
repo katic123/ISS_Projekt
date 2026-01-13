@@ -23,7 +23,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		start = !start
 		if not start:
-			reset_rocket()
+			restart_rocket()
 	
 	if Input.is_action_pressed("ui_left"): 
 		yaw_angle += turn_speed * delta
@@ -43,6 +43,12 @@ func _physics_process(delta):
 	if start:
 		var substep_delta = delta / substeps
 		
+		if time == 0.0:
+			$SoundRocketFire.play()
+				
+		if not $SoundRocketFly.playing:
+			$SoundRocketFly.play()
+		
 		for i in range(substeps):
 			var propulsion = -transform.basis.z * min(acceleration * time, max_speed)
 			
@@ -51,6 +57,14 @@ func _physics_process(delta):
 			var collision = move_and_collide(velocity * substep_delta)
 			
 			if collision:
+				match randi_range(0, 2):
+					0:
+						%SoundRocketExplode1.play()
+					1:
+						%SoundRocketExplode2.play()
+					2:
+						%SoundRocketExplode3.play()
+				
 				restart_rocket()
 				break 
 			
@@ -62,6 +76,10 @@ func _physics_process(delta):
 func restart_rocket(): 
 	start = false
 	time = 0.0
+	
+	if $SoundRocketFly.playing:
+		$SoundRocketFly.stop()
+		
 	reset_rocket()
 
 func reset_rocket():

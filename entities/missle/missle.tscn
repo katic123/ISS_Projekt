@@ -1,6 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://ku3bwaxsbvq"]
+[gd_scene load_steps=10 format=3 uid="uid://ku3bwaxsbvq"]
 
 [ext_resource type="Script" uid="uid://0031mht074al" path="res://entities/missle/components/rocket_movement.gd" id="1_ebkh3"]
+[ext_resource type="AudioStream" uid="uid://cgn5ccs5wq1gg" path="res://sounds/rocket1.wav" id="2_6s7ip"]
+[ext_resource type="AudioStream" uid="uid://b756rnfremdbf" path="res://sounds/explode1.wav" id="3_wy4ia"]
+[ext_resource type="AudioStream" uid="uid://b13o31p7453nm" path="res://sounds/rocketfire1.wav" id="4_acwh1"]
+[ext_resource type="AudioStream" uid="uid://dadrdm1xib54m" path="res://sounds/explode2.wav" id="5_2ofh2"]
+[ext_resource type="AudioStream" uid="uid://uxdorx5fnkh" path="res://sounds/explode3.wav" id="6_23pno"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sl6fm"]
 albedo_color = Color(0.06757591, 0.13875896, 0.068691775, 1)
@@ -47,3 +52,28 @@ material = SubResource("StandardMaterial3D_sl6fm")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(-4.7300134e-08, 4.7300137e-08, -1.082101, 1.082101, 0, -4.7300137e-08, 0, -1.082101, -4.7300137e-08, -0.008737288, -3.819184e-10, 0)
 shape = SubResource("CylinderShape3D_sl6fm")
+
+[node name="SoundRocketFly" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_6s7ip")
+volume_db = -20.0
+
+[node name="SoundRocketExplode1" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_wy4ia")
+volume_db = -20.0
+
+[node name="SoundRocketFire" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_acwh1")
+volume_db = -20.0
+
+[node name="SoundRocketExplode2" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_2ofh2")
+volume_db = -20.0
+
+[node name="SoundRocketExplode3" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_23pno")
+volume_db = -20.0
