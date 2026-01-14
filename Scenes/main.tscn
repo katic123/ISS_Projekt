@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://d3ir376df04gd"]
 
 [ext_resource type="Script" uid="uid://c8n7ss4q1ht50" path="res://Scenes/flyingcamera.gd" id="1_8gbba"]
-[ext_resource type="PackedScene" uid="uid://ku3bwaxsbvq" path="res://entities/missle/missle.tscn" id="1_jjgbg"]
+[ext_resource type="PackedScene" uid="uid://dymjq2key3kb1" path="res://entities/missle/missle.tscn" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://d0upfyy8j6w21" path="res://Scenes/switch_cameras.gd" id="1_kry3j"]
 [ext_resource type="PackedScene" uid="uid://bsms6twx141w1" path="res://entities/ground/ground.tscn" id="3_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://glqclqyhwk8x" path="res://entities/tank/tank.tscn" id="4_jjvhh"]
@@ -34,3 +34,7 @@ script = ExtResource("1_8gbba")
 
 [node name="Arrow" parent="." instance=ExtResource("6_21xkr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -25.714571)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
