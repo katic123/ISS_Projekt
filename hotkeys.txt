@@ -1,0 +1,4 @@
+launch rocket - space
+control rocket - w/a/s/d
+switch camera view - tab
+toggle slow mo - f
