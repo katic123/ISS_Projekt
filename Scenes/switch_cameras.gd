@@ -4,7 +4,7 @@ extends Node3D
 @onready var missile_camera = $RocketPlayer/MissleCamera  
 @onready var tank = $Tank
 @onready var arrow = $Arrow
-@onready var rocket= $RocketPlayer  
+@onready var rocket= $RocketPlayer
 var radius=50
 func _ready():
 	launcher_camera.position = rocket.position+Vector3(0,2,2)
