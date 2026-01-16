@@ -1,19 +1,48 @@
-[gd_scene load_steps=7 format=3 uid="uid://d3ir376df04gd"]
+[gd_scene load_steps=11 format=3 uid="uid://d3ir376df04gd"]
 
 [ext_resource type="Script" uid="uid://c8n7ss4q1ht50" path="res://Scenes/flyingcamera.gd" id="1_8gbba"]
-[ext_resource type="PackedScene" uid="uid://ku3bwaxsbvq" path="res://entities/missle/missle.tscn" id="1_jjgbg"]
+[ext_resource type="PackedScene" uid="uid://dymjq2key3kb1" path="res://entities/missle/missle.tscn" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://d0upfyy8j6w21" path="res://Scenes/switch_cameras.gd" id="1_kry3j"]
+[ext_resource type="Script" uid="uid://d1of12ts150xl" path="res://Scenes/sun.gd" id="2_6bp64"]
 [ext_resource type="PackedScene" uid="uid://bsms6twx141w1" path="res://entities/ground/ground.tscn" id="3_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://glqclqyhwk8x" path="res://entities/tank/tank.tscn" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://b100j35d68crv" path="res://entities/arrow/arrow.tscn" id="6_21xkr"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_21xkr"]
+
+[sub_resource type="Sky" id="Sky_6bp64"]
+sky_material = SubResource("ProceduralSkyMaterial_21xkr")
+
+[sub_resource type="Environment" id="Environment_344ge"]
+background_mode = 2
+sky = SubResource("Sky_6bp64")
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.5484086, 0.58475554, 0.63727725, 1)
+fog_density = 0.1613
+fog_sky_affect = 0.43
+
 [node name="Main" type="Node3D"]
 script = ExtResource("1_kry3j")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.89907986, 0.056566905, 0.43411475, 0.04123549, -0.9762661, 0.21261281, 0.43583834, 0.20905682, 0.8754086, 0, 0, -0.22804451)
+light_color = Color(1, 1, 0.101960786, 1)
+light_energy = 2.0
+light_indirect_energy = 0.75
+light_volumetric_fog_energy = 1.166
+shadow_enabled = true
+shadow_normal_bias = 0.1
+directional_shadow_max_distance = 210.3
+script = ExtResource("2_6bp64")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.7628715, 0.6465502, 0, -0.6465502, 0.7628715, 0, 125.65243, 202.17198)
 light_energy = 1.055
 shadow_enabled = true
+
+[node name="Sky" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_344ge")
 
 [node name="RocketPlayer" parent="." instance=ExtResource("1_jjgbg")]
 transform = Transform3D(1, 0, 0.00015702844, 0, 1, 0, -0.00015702844, 0, 1, 0, 7, 0)
