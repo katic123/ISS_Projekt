@@ -8,7 +8,7 @@ extends Node3D
 var radius=50
 func _ready():
 	launcher_camera.position = rocket.position+Vector3(0,2,2)
-	var distance = 500  
+	var distance = 5 
 	var random_angle = randf_range(0, 2 * PI)
 	
 	tank.position.x = rocket.position.x + cos(random_angle) * distance
