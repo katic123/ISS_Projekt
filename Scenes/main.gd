@@ -34,6 +34,8 @@ func _physics_process(delta):
 		if(explosion):
 			if(explosion.exploded==false):
 				explosion.explode()
+				await get_tree().create_timer(4.0).timeout
+				get_tree().reload_current_scene()
 	
 	
 func _input(event):
