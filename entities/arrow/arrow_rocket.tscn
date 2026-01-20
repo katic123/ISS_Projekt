@@ -1,13 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://b100j35d68crv"]
+[gd_scene load_steps=2 format=3 uid="uid://bytfdtqxtm87k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8pgee"]
 transparency = 1
-albedo_color = Color(0.5921569, 0.03137255, 0, 0.92941177)
+albedo_color = Color(0.5867385, 0.030794704, 0, 1)
 
 [node name="Arrow" type="Node3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, -0.58721304, 0)
 
 [node name="CSGCylinder3D2" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 4.6063833, -5.5360246e-08)
+transform = Transform3D(1, 0, 0, 0, -1, -1.509958e-07, 0, 1.509958e-07, -1, 0, 4.6063833, -5.5360246e-08)
 radius = 2.0458984
 height = 3.8577423
 cone = true

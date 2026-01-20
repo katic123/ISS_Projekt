@@ -8,10 +8,9 @@ func _on_body_entered(body: Node):
 		print("rocket entered tank area3d")
 		call_deferred("destroy_tank", body)
 
-
-
 func destroy_tank(rocket: Node):
 	var tank = get_parent()
+	
 	
 	tank.visible = false
 	disable_tank_collisions(tank)
@@ -19,6 +18,7 @@ func destroy_tank(rocket: Node):
 	
 	if rocket.has_method("restart_rocket"):
 		rocket.restart_rocket()
+
 func disable_tank_collisions(node: Node):
 	if node is CollisionObject3D:
 		node.collision_layer = 0

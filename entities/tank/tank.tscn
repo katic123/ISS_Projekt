@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bbl85mlx1i5j5" path="res://entities/tank/components/tank_movement.gd" id="1_cbkxa"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_napho"]
-size = Vector3(3.4402924, 3.2607899, 7.7048187)
+size = Vector3(7.000593, 3.2607899, 9.546566)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_napho"]
 albedo_color = Color(0.14655083, 0.23016897, 0.14464009, 1)
@@ -15,7 +15,7 @@ metallic = 0.1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cbkxa"]
 albedo_color = Color(0.16313037, 0.28202933, 0.17160255, 1)
-metallic = 0.2
+metallic = 0.74
 
 [node name="Tank" type="Node3D"]
 script = ExtResource("1_cbkxa")
@@ -24,7 +24,7 @@ script = ExtResource("1_cbkxa")
 script = ExtResource("1_5q2cn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05924225, 0.2855692, 0.4409132)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3415556, 0.2855692, 0.5919466)
 shape = SubResource("BoxShape3D_napho")
 
 [node name="TankParts" type="Node3D" parent="."]

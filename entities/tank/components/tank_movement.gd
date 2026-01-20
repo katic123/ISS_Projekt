@@ -1,6 +1,7 @@
 extends Node3D
 
-@export var move_speed: float = 5.0
+@export var move_speed: float = 1.0
+@export var rotation_speed: float = 0.4
 @export var tilt_smoothness: float = 5.0 
 var previous_terrain_normal: Vector3 = Vector3(0,1,0)
 var random_count=0;
@@ -13,9 +14,9 @@ func _physics_process(delta):
 
 	var forward_direction = transform.basis. z
 	if random_count<int(random/2):
-		rotation_degrees.y+=randf_range(0,1)
+		rotation_degrees.y+=randf_range(0,rotation_speed)
 	if random_count>=int(random/2):
-		rotation_degrees.y+=randf_range(-1,0)
+		rotation_degrees.y+=randf_range(-rotation_speed,0)
 	if(random_count==random):
 		random_count=0
 	random_count+=1

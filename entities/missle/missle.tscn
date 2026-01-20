@@ -9,6 +9,7 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sl6fm"]
 albedo_color = Color(0.06757591, 0.13875896, 0.068691775, 1)
+metallic = 0.72
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ebkh3"]
 albedo_color = Color(0.0056611504, 0.0056611514, 0.00566115, 1)

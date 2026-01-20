@@ -39,9 +39,9 @@ var spawned_spheres: Array = []
 # =========================================================
 func _ready():
 	# Set random position
-	position.x = randf_range(-1000, 0)
+	position.x = randf_range(-100, 100)
 	position.y = 1000
-	position.z = randf_range(0, 1000)
+	position.z = randf_range(-100, 100)
 	
 	# Adjust position based on terrain
 	var terrain_info = get_terrain_info()
