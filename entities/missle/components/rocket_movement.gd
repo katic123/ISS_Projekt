@@ -1,5 +1,5 @@
 extends CharacterBody3D
-
+signal collision 
 # =========================================================
 # PHYSICAL PARAMETERS (DYNAMICS MODEL)
 # =========================================================
@@ -129,6 +129,7 @@ func _physics_process(delta: float) -> void:
 					2:
 						%SoundRocketExplode3.play()
 				restart_rocket()
+				emit_signal("collision")
 				break
 	else:
 		velocity = Vector3.ZERO

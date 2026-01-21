@@ -11,6 +11,7 @@ extends Node3D
 var slowmo_enabled: bool = false
 var distance = 600
 func _ready():
+	rocket.connect("collision", Callable(self, "_on_collision"))
 	launcher_camera.position = rocket.position+Vector3(0,2,2)
 	
 	var random_angle = randf_range(0, 2 * PI)
@@ -33,11 +34,15 @@ func _physics_process(delta):
 		arrow.visible=false
 		if(explosion):
 			if(explosion.exploded==false):
+				slowmo_enabled=false
+				Engine.time_scale = 1.0
 				explosion.explode()
 				await get_tree().create_timer(4.0).timeout
 				get_tree().reload_current_scene()
 	
-	
+func _on_collision():
+	slowmo_enabled=false
+	Engine.time_scale = 1.0
 func _input(event):
 	if event.is_action_pressed("ui_select"):
 		var launcher_on = launcher_camera.current
