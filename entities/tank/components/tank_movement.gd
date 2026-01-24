@@ -26,7 +26,6 @@ func _physics_process(delta):
 	
 	if terrain_info:
 		global_position.y = terrain_info.position.y + 1.0
-		
 		tilt_to_normal(terrain_info.normal, delta)
 
 func get_terrain_info():
@@ -43,8 +42,8 @@ func tilt_to_normal(terrain_normal: Vector3, delta: float):
 	
 	var current_forward = transform.basis.z
 	var current_right = transform.basis.x
-	
 	var new_up = previous_terrain_normal
+	
 	var new_right = current_right - new_up * current_right.dot(new_up)
 	new_right = new_right.normalized()
 	var new_forward = new_up.cross(new_right).normalized()

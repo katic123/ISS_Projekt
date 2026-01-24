@@ -20,7 +20,7 @@ var time: float = 0.0
 # =========================================================
 var pitch_angle: float = 45.0                  # deg
 var yaw_angle: float = 0.0                     # deg
-var roll_angle: float = 0.0                    # deg (unused)
+var roll_angle: float = 0.0                    # deg
 
 var start: bool = false
 var start_position: Vector3
@@ -122,7 +122,7 @@ func _physics_process(delta: float) -> void:
 			if collision:
 				# Play explosion sound on collision
 				match randi_range(0, 2):
-					0:
+					0: 
 						%SoundRocketExplode1.play()
 					1:
 						%SoundRocketExplode2.play()

@@ -23,26 +23,24 @@ func _ready():
 	
 	
 func _physics_process(delta):
-	
 	arrow.position=tank.position
-	if(explosion):
-		explosion.position=tank.position
+	explosion.position=tank.position
 	if(tank.visible==false):
 		tank_camera.current=true
 		tank.move_speed= 0
 		tank.rotation_speed=0
 		arrow.visible=false
-		if(explosion):
-			if(explosion.exploded==false):
-				slowmo_enabled=false
-				Engine.time_scale = 1.0
-				explosion.explode()
-				await get_tree().create_timer(4.0).timeout
-				get_tree().reload_current_scene()
+		if(explosion.exploded==false):
+			slowmo_enabled=false
+			Engine.time_scale = 1.0
+			explosion.explode()
+			await get_tree().create_timer(4.0).timeout
+			get_tree().reload_current_scene()
 	
 func _on_collision():
 	slowmo_enabled=false
 	Engine.time_scale = 1.0
+	
 func _input(event):
 	if event.is_action_pressed("ui_select"):
 		var launcher_on = launcher_camera.current
