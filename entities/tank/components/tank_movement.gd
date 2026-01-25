@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var move_speed: float = 1.0
+@export var move_speed: float = 6.0
 @export var rotation_speed: float = 0.4
 @export var tilt_smoothness: float = 5.0 
 var previous_terrain_normal: Vector3 = Vector3(0,1,0)
