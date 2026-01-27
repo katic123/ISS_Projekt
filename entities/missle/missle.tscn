@@ -20,6 +20,7 @@ radius = 0.13964844
 [node name="RocketPlayer" type="CharacterBody3D"]
 transform = Transform3D(-0.00015707215, 0, 1, 0, 1, 0, -1, 0, -0.00015707215, 0, 0, 0)
 script = ExtResource("1_ebkh3")
+flkgdlkggln
 
 [node name="RocketParts" type="Node3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
